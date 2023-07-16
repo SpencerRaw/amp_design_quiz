@@ -27,7 +27,7 @@ st.set_page_config(page_title=page_title_raw,
                    page_icon=page_icon, layout=layout)
 st.title(page_title + " " + page_icon)
 
-st.markdown('Streamlit is **_really_ cool**.')
+# st.markdown('Streamlit is **_really_ cool**.')
 # st.markdown(
 #     "This text is :red[colored red], and this is **:blue[colored]** and bold.")
 # st.markdown(":green[$\sqrt{x^2+y^2}=1$] is a Pythagorean identity. :pencil:")
