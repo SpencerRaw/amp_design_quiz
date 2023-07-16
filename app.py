@@ -11,10 +11,10 @@ import datetime
 
 
 # -------------- SETTINGS --------------
-incomes = ["Salary", "Blog", "Other Income"]
-expenses = ["Rent", "Utilities", "Groceries",
-            "Car", "Other Expenses", "Saving"]
-currency = "USD"
+# incomes = ["Salary", "Blog", "Other Income"]
+# expenses = ["Rent", "Utilities", "Groceries",
+#             "Car", "Other Expenses", "Saving"]
+# currency = "USD"
 page_title = "以:red[破坏细胞膜为抗菌机制]的多肽序列设计问卷"
 page_title_raw = "以破坏细胞膜为抗菌机制的多肽序列设计问卷"
 # emojis: https://www.webfx.com/tools/emoji-cheat-sheet/
@@ -45,6 +45,7 @@ my_bar = st.progress(pg_now*10/9, text=f"当前进度为: {pg_now}/9")
 # --- DROP DOWN VALUES FOR SELECTING THE PERIOD ---
 # years = [datetime.today().year, datetime.today().year + 1]
 # months = list(calendar.month_name[1:])
+
 
 research_year = ['待选择', "1-3年", "3-5年(含3年)", "5-10年(含5年)", "≥10年"]
 
@@ -228,4 +229,5 @@ with st.form("entry_form", clear_on_submit=True):
         db.insert_period(period, st.session_state["research_year"], st.session_state["number_aa"], st.session_state["二级重要"], st.session_state["二级含混"], st.session_state["带电重要"], st.session_state["带电含混"], st.session_state["疏水重要"], st.session_state["疏水含混"], st.session_state["极性重要"], st.session_state["极性含混"], st.session_state["封端"],
                          st.session_state["排名"], st.session_state["二级重要补充"], st.session_state["二级含混补充"], st.session_state["带电重要补充"], st.session_state["带电含混补充"], st.session_state["带电范围"], st.session_state["疏水重要补充"], st.session_state["疏水含混补充"], st.session_state["疏水比例"], st.session_state["极性重要补充"], st.session_state["极性含混补充"], st.session_state["重要片段"])
         st.success("保存成功!")
+        st.markdown('非常感谢您抽出时间参与我们的多肽设计问卷调查。您的意见对于我们深入研究抗菌肽的性能与设计具有重要的价值。如果您对我们的研究感兴趣并希望了解更多相关信息，我们将非常乐意与您分享研究结果。再次衷心感谢您的参与和支持！')
     # st.write(st.session_state[)
