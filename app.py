@@ -197,12 +197,17 @@ with st.expander(f"4.极性"):
         my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 with st.expander(f"5.封端"):
-    q51 = st.multiselect(
-        '5.1您觉得:red[封端]对多肽抗菌性能的影响程度如何？若重要,在设计多肽时您会采取下列哪种封端方式？:red[(必填,可多选)]',
-        ["N端封端", "C端封端", "两端均封端", "两端均不封端"],
-        [], key="封端")
+    q50 = st.selectbox("5.0您觉得:red[封端]对多肽抗菌性能的影响程度如何？:red[(必填)]",
+                      ["待选择","重要","不重要"])
+    if q50 == "重要":
+        q51 = st.multiselect(
+            '5.1您觉得:red[封端]对多肽抗菌性能的影响程度如何？若重要,在设计多肽时您会采取下列哪种封端方式？:red[(必填,可多选)]',
+            ["N端封端", "C端封端", "两端均封端"],
+            [], key="封端")
+    else:
+        st.session_state["封端"] = ["不重要"]
 
-    if q51:
+    if q50 != "待选择":
         pg_now += 1
         my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
