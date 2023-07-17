@@ -35,7 +35,7 @@ st.title(page_title + " " + page_icon)
 # progress_text = "进度条"
 # my_bar = st.progress(0, text=progress_text)
 pg_now = 0
-my_bar = st.progress(pg_now*10/9, text=f"当前进度为: {pg_now}/9")
+my_bar = st.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 # for percent_complete in range(100):
 #     time.sleep(0.1)
@@ -61,18 +61,26 @@ hide_st_style = """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # with st.form("entry_form", clear_on_submit=True):
-col_my = st.selectbox("0.您从事此类研究的时间经历大约多长时间？:red[(必填)]",
+col_my = st.selectbox("0.1您从事此类研究的时间经历大约多长时间？:red[(必填)]",
                       research_year, key="research_year")
 
 if col_my != '待选择':
     pg_now += 1
-    my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+    my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
+  
+col_my_2 = st.selectbox("0.2您主要采用哪些研究手段开展此类研究？:red[(必填)]",
+                      ["待选择","实验","模拟","两者结合"], key="研究手法")
+
+if col_my_2 != '待选择':
+    pg_now += 1
+    my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
+
 with st.expander(f"1.多肽结构"):
     q11 = st.number_input(f"1.1您觉得此类多肽的残基至少要多少个？:red[(必填)]", min_value=0,
                           format="%i", step=1, key="number_aa")
     if q11 != 0:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
     q12 = st.multiselect(
         '1.2您觉得哪些:red[二级结构]对此类多肽的抗菌性能的影响程度:red[比较重要]？:red[(必填,可多选)]',
@@ -96,7 +104,7 @@ with st.expander(f"1.多肽结构"):
         st.session_state["二级含混补充"] = None
     if q12 and q122:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 with st.expander(f"2.带电性"):
     q21 = st.multiselect(
@@ -123,14 +131,14 @@ with st.expander(f"2.带电性"):
         st.session_state["带电含混补充"] = None
     if q21 and q212:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
     q22 = st.slider(
         '2.2 您觉得多肽:red[带电量]范围是多少？(可不填)',
         -10, 10, (-10, 10), key="带电范围")
     if q22[0] != -10 or q22[1] != 10:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 with st.expander(f"3.疏水性"):
     q31 = st.multiselect(
@@ -157,7 +165,7 @@ with st.expander(f"3.疏水性"):
         st.session_state["疏水含混补充"] = None
     if q31 and q312:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
     q32 = st.slider('3.2您觉得疏水残基在肽链所占的比例要多少？(可不填)',
                     0.0, 100.0, 0.0, key="疏水比例")
 
@@ -186,7 +194,7 @@ with st.expander(f"4.极性"):
         st.session_state["极性含混补充"] = None
     if q41 and q412:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 with st.expander(f"5.封端"):
     q51 = st.multiselect(
@@ -196,7 +204,7 @@ with st.expander(f"5.封端"):
 
     if q51:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
 # 带电性	二级结构	长度	疏水性	极性	芳香基团	侧链大小
 df = pd.DataFrame(
@@ -216,7 +224,7 @@ with st.expander(f"6.补充"):
     edited_df = st.data_editor(df, num_rows="dynamic", key="排名")
     if edited_df["排名"].max() > 1:
         pg_now += 1
-        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/9")
+        my_bar.progress(pg_now*10, text=f"当前进度为: {pg_now}/10")
 
     p62 = st.text_area("6.2您是否觉得是否有哪些氨基酸的序列片段对此类多肽的设计比较重要？若有请举例（可不填）。",
                        placeholder="重要的氨基酸序列片段 ...", key="重要片段")
